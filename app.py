@@ -5,6 +5,13 @@ from typing import Literal, Annotated
 import pickle
 import pandas as pd
 
+
+# ---- FIX FOR SKLEARN PICKLE COMPATIBILITY ----
+import sklearn.compose._column_transformer
+class _RemainderColsList(list):
+    pass
+sklearn.compose._column_transformer._RemainderColsList = _RemainderColsList
+
 # import the ml model
 with open('model.pkl', 'rb') as f:
     model = pickle.load(f)
